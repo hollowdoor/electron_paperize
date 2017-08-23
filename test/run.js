@@ -4,7 +4,7 @@ const paperize = require('../');
 const hovers = new paperize.HoverBox({id: 'stuff'});
 const floats = new paperize.FloatingBox({id: 'stuff'});
 const images_dir = path.join(process.cwd(), 'img');
-paperize.addStyles({id:'stuff', scaler: 'scale(3)'});
+paperize.addStyles({id:'stuff', scalar: 3});
 readdir(images_dir)
 .then(files=>{
     files.map(file=>{

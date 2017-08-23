@@ -1,6 +1,10 @@
-@closer: @scaler;
+@closer: @scalar;
 @large-filter: blur(0) drop-shadow(8px 14px 2px rgba(0,0,0,0.5));
 @def-filter: blur(0) drop-shadow(0 0 0 0);
+
+:root {
+    --closer: @scalar;
+}
 
 /*Use .make3D on the parent if 3D transforms are used*/
 .make3D {
@@ -28,7 +32,7 @@ scale is used here instead.
 
 .make-closer {
     filter: @large-filter;
-    transform: @closer;
+    transform: scale(var(--closer));
     z-index: 50;
 }
 
