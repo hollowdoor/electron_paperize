@@ -36,7 +36,9 @@ function electronLess({
     try{
         let style = document.querySelector('#'+id);
         style.parentNode.removeChild(style);
-    }catch(e){}
+    }catch(e){
+        return Promise.reject(e);
+    }
 
     let css = fs.readFileSync(source, 'utf8');
 
