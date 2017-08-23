@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const less = require('less');
-let stylesAdded = false;
 
-function appendStyles(css){
+function appendStyles(css, id=null){
     let head = document.head || document.getElementsByTagName('head')[0],
     style = document.createElement('style');
+
+    if(id){
+        style.setAttribute('id', id);
+    }
 
     style.type = 'text/css';
     if (style.styleSheet){
@@ -25,22 +28,42 @@ function toLessVars(obj){
     return pre;
 }
 
+function electronLess({
+    source,
+    id,
+    variables = {}
+} = {}){
+    try{
+        let style = document.querySelector('#'+id);
+        style.parentNode.removeChild(style);
+    }catch(e){}
+
+    let css = fs.readFileSync(source, 'utf8');
+
+    let pre = toLessVars(variables);
+
+    return new Promise((resolve, reject)=>{
+        less.render(pre+css, function (e, output) {
+            if(e) return reject(e);
+            appendStyles(output.css, id);
+            resolve({
+                source,
+                id
+            });
+        });
+    });
+}
+
 module.exports = function addStyles(options){
-
-    if(stylesAdded) return;
-
+    if(!options.id){
+        throw new Error('options.id is required');
+    }
     if(!options.scaler){
         options.scaler = 'scale(3)';
     }
-
-    let css = fs.readFileSync(path.join(__dirname, 'paperize.less'), 'utf8');
-
-    let pre = toLessVars(options);
-    
-    less.render(pre+css, function (e, output) {
-        if(e) return console.error(e);
-        appendStyles(output.css);
+    return electronLess({
+        source: path.join(__dirname, 'paperize.less'),
+        id: options.id,
+        variables: options
     });
-
-    stylesAdded = true;
 }
