@@ -36,8 +36,7 @@ module.exports = function addStyles(options){
     let css = fs.readFileSync(path.join(__dirname, 'paperize.less'), 'utf8');
 
     let pre = toLessVars(options);
-
-    console.log('pre ',pre)
+    
     less.render(pre+css, function (e, output) {
         if(e) return console.error(e);
         appendStyles(output.css);
