@@ -1,0 +1,105 @@
+/*
+http://tobiasahlin.com/blog/how-to-animate-box-shadow/
+*/
+
+.paperized {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: box-shadow 0.4s ease-in-out, transform 0.5s;
+    width: 150px;
+    left: 0;
+    display: inline-block;
+
+}
+
+.paperized-show-shadow {
+    box-shadow: 12px 11px 10px 3px rgba(26, 31, 47, 0.6);
+    /*Put shadow over siblings*/
+    position: absolute;
+}
+
+.paperized-z-index-300 {
+    z-index: 300;
+}
+
+/* Transition to a bigger shadow on hover */
+.paperized-enlarge-50-50 /*center*/ {
+    box-shadow: 12px 11px 10px 3px rgba(26, 31, 47, 0.6);
+    z-index: 300;
+    position: relative;
+    /*width: 200px;*/
+    transform: scale(2);
+    transform-origin: 50% 50%;
+    box-sizing: border-box;
+}
+
+.paperized-enlarge-100-100 /*bottom right*/ {
+    box-shadow: 12px 11px 10px 3px rgba(26, 31, 47, 0.6);
+    z-index: 300;
+    position: relative;
+    transform: scale(2);
+    transform-origin: 50% 50%;
+    box-sizing: border-box;
+}
+
+.paperized-enlarge-0-50 /*left middle*/ {
+    box-shadow: 12px 11px 10px 3px rgba(26, 31, 47, 0.6);
+    z-index: 300;
+    position: relative;
+    transform: scale(2);
+    transform-origin: 0 50%;
+    box-sizing: border-box;
+}
+
+.paperized-enlarge-50-0 /*middle right*/ {
+    box-shadow: 12px 11px 10px 3px rgba(26, 31, 47, 0.6);
+    z-index: 300;
+    position: relative;
+    transform: scale(2);
+    transform-origin: 50% 0;
+    box-sizing: border-box;
+}
+
+.paperized-enlarge-50-0 /*middle right*/ {
+    box-shadow: 12px 11px 10px 3px rgba(26, 31, 47, 0.6);
+    z-index: 300;
+    position: relative;
+    transform: scale(2);
+    transform-origin: 50% 0;
+    box-sizing: border-box;
+}
+
+
+
+.paperized-parent {
+    position: relative;
+    width: 151px;
+    height: 130px;
+    left: 0px;
+    right: 0px;
+    marging: 1px;
+}
+
+.flowing-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.file-info {
+    position: absolute;
+    bottom: 0px;
+    height: 0px;
+    transition: height 0.4s ease-in-out;
+    width: 90%;
+    overflow: hidden;
+    text-align: left;
+    /*Make ellipsis left*/
+    direction: rtl;
+    text-overflow: ellipsis;
+    padding: 5px;
+}
+
+.file-info-show {
+    height: 18px;
+}
