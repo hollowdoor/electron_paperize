@@ -35,7 +35,7 @@ function electronLess({
 } = {}){
     try{
         let style = document.querySelector('#'+id);
-        style.parentNode.removeChild(style);
+        if(style) style.parentNode.removeChild(style);
     }catch(e){
         return Promise.reject(e);
     }
