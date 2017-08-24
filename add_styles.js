@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const less = require('less');
+const hasha = require('hasha');
 
 function appendStyles(css, id=null){
     let head = document.head || document.getElementsByTagName('head')[0],
@@ -33,6 +34,11 @@ function electronLess({
     id,
     variables = {}
 } = {}){
+
+    if(typeof id !== 'string'){
+        id = hasha(source + '');
+    }
+
     try{
         let style = document.querySelector('#'+id);
         if(style) style.parentNode.removeChild(style);
@@ -40,7 +46,13 @@ function electronLess({
         return Promise.reject(e);
     }
 
-    let css = fs.readFileSync(source, 'utf8');
+    let css;
+
+    try{
+        css = fs.readFileSync(source, 'utf8');
+    }catch(e){
+        return Promise.reject(e);
+    }
 
     let pre = toLessVars(variables);
 
